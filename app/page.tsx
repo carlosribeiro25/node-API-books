@@ -1,5 +1,5 @@
 "use client"
-
+import React, { useState } from 'react';
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -36,7 +36,7 @@ export default function Home() {
   }
 
   // Função para adicionar um novo livro
-  const addBook = async (e) => {
+  const addBook = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!title || !author) return
