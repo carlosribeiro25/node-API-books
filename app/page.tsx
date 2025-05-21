@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 import { BookOpen, Plus, Trash2 } from "lucide-react"
 
 export default function Home() {
-  const [books, setBooks] = useState([])
+  const [books, setBooks] = useState<Book[]>([])
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [loading, setLoading] = useState(true)
@@ -63,7 +63,7 @@ export default function Home() {
   }
 
   // Função para remover um livro
-  const removeBook = async (index) => {
+  const removeBook = async (index: number) => {
     try {
       const response = await fetch(`${API_URL}?index=${index}`, {
         method: "DELETE",
