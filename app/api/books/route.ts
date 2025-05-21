@@ -1,6 +1,3 @@
-import { headers } from "next/headers"
-import { title } from "process"
-
 const books = [
     { title: "O senhor dos Aneis", author: "J.R.R. Tolkien" },
     { title: "Harry Potter", author: "J.K. Rowling" },
@@ -9,7 +6,6 @@ const books = [
     { title: "Cemiterio de Dragões", author: "Raphael Draccon" }
 ]
 
-
 export async function GET() {
     await new Promise((resolve) => setTimeout(resolve, 500))
 
@@ -17,7 +13,6 @@ export async function GET() {
         headers: {
             "content-Type": "application/json",
         },
-
     })
 }
 
@@ -48,6 +43,7 @@ export async function POST(request: Request) {
             },
         })
     } catch (error) {
+        console.error(error) // Agora 'error' está sendo usado
         return new Response(JSON.stringify({ error: "Erro ao processar requisição" }), {
             status: 500,
             headers: {
@@ -63,7 +59,6 @@ export async function DELETE(request: Request) {
         const indexParam = url.searchParams.get("index")
         const index = indexParam ? Number.parseInt(indexParam) : -1
 
-
         if (isNaN(index) || index < 0 || index >= books.length) {
             return new Response(JSON.stringify({ error: "Livro não encontrado" }), {
                 status: 404,
@@ -77,16 +72,17 @@ export async function DELETE(request: Request) {
 
         return new Response(JSON.stringify(removeBook), {
             headers: {
-                    "content-Type": "application/json",
-                },
+                "content-Type": "application/json",
+            },
         })
 
     } catch (error) {
-        return new Response(JSON.stringify({error: "Erro ao processar a requisição"}), {
+        console.error(error) // Agora 'error' está sendo usado
+        return new Response(JSON.stringify({ error: "Erro ao processar a requisição" }), {
             status: 500,
             headers: {
-                    "content-Type": "application/json",
-                },
+                "content-Type": "application/json",
+            },
         })
     }
 }
