@@ -7,6 +7,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "@/components/ui/label"
 import { BookOpen, Plus, Trash2 } from "lucide-react"
 
+type Book = {
+  title: string
+  author: string
+}
 export default function Home() {
   const [books, setBooks] = useState<Book[]>([])
   const [title, setTitle] = useState("")
